@@ -1,0 +1,8 @@
+# Dataset
+CelebA/
+
+# Database
+database/
+
+# Python
+__pycache__/
