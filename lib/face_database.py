@@ -37,6 +37,10 @@ class FaceDatabase:
         im = cv2.cvtColor(im, cv2.COLOR_BGR2RGB)
         cv2.imwrite(self.db_root + im_fname + self.im_ext, 255*im)
 
+        # Remove cache if exists
+        if os.path.isfile(self.db_root + "/representations_vgg_face.pkl"):
+            os.remove(self.db_root + "/representations_vgg_face.pkl")
+
     def _generate_filename(self):
         # Generate unique filename
         return uuid.uuid4().hex

@@ -10,4 +10,4 @@ config.face_database.im_ext = ".jpg"
 config.face_database.im_dim = (224, 224)
 
 config.face_recognition = CN()
-config.face_recognition.detector_backend = "dlib"
+config.face_recognition.detector_backend = "retinaface"
