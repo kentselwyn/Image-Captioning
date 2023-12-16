@@ -32,7 +32,7 @@ class FaceRecognition:
                 detector_backend=self.detector_backend
             )
 
-            if len(df) == 0:
+            if df[0].empty:
                 result.append(('Unknown', pred['bounding_box']))
             else:
                 face_id = self._unpack_top_face_id(df)
@@ -42,7 +42,7 @@ class FaceRecognition:
         return result
 
     def _unpack_top_face_id(self, df):
-        return Path(df[0].loc[0, 'identity']).stem
+        return Path(df[0]['identity'].iloc[0]).stem
 
     def _pack_bounding_box(self, facial_area):
         return facial_area['x'], facial_area['y'], facial_area['w'], facial_area['h']
