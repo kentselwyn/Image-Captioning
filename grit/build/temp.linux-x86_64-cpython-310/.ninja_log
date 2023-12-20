@@ -1,0 +1,13 @@
+# ninja log v5
+5	29926	1702692354000000000	/content/drive/Shareddrives/FP/FP/Captioning/grit/build/temp.linux-x86_64-cpython-310/content/drive/Shareddrives/FP/FP/Captioning/grit/models/ops/src/cpu/ms_deform_attn_cpu.o	671f4f086361806b
+5	62318	1702692386000000000	/content/drive/Shareddrives/FP/FP/Captioning/grit/build/temp.linux-x86_64-cpython-310/content/drive/Shareddrives/FP/FP/Captioning/grit/models/ops/src/cuda/ms_deform_attn_cuda.o	ce9010a94e5b4e33
+7	65709	1702692390000000000	/content/drive/Shareddrives/FP/FP/Captioning/grit/build/temp.linux-x86_64-cpython-310/content/drive/Shareddrives/FP/FP/Captioning/grit/models/ops/src/vision.o	993f5389414c7d3c
+27	30398	1702692428000000000	/content/drive/Shareddrives/FP/FP/Captioning/grit/build/temp.linux-x86_64-cpython-310/content/drive/Shareddrives/FP/FP/Captioning/grit/models/ops/src/cpu/ms_deform_attn_cpu.o	a9f1407488007a7a
+28	63907	1702692461000000000	/content/drive/Shareddrives/FP/FP/Captioning/grit/build/temp.linux-x86_64-cpython-310/content/drive/Shareddrives/FP/FP/Captioning/grit/models/ops/src/cuda/ms_deform_attn_cuda.o	1c3b89799bdc41e5
+29	67219	1702692464000000000	/content/drive/Shareddrives/FP/FP/Captioning/grit/build/temp.linux-x86_64-cpython-310/content/drive/Shareddrives/FP/FP/Captioning/grit/models/ops/src/vision.o	7edb80a4c395f3af
+959	33622	1702703102000000000	/content/drive/Shareddrives/FP/FP/Captioning/grit/build/temp.linux-x86_64-cpython-310/content/drive/Shareddrives/FP/FP/Captioning/grit/models/ops/src/cpu/ms_deform_attn_cpu.o	671f4f086361806b
+960	66585	1702703135000000000	/content/drive/Shareddrives/FP/FP/Captioning/grit/build/temp.linux-x86_64-cpython-310/content/drive/Shareddrives/FP/FP/Captioning/grit/models/ops/src/cuda/ms_deform_attn_cuda.o	ce9010a94e5b4e33
+962	68183	1702703137000000000	/content/drive/Shareddrives/FP/FP/Captioning/grit/build/temp.linux-x86_64-cpython-310/content/drive/Shareddrives/FP/FP/Captioning/grit/models/ops/src/vision.o	993f5389414c7d3c
+40	27110	1702703168000000000	/content/drive/Shareddrives/FP/FP/Captioning/grit/build/temp.linux-x86_64-cpython-310/content/drive/Shareddrives/FP/FP/Captioning/grit/models/ops/src/cpu/ms_deform_attn_cpu.o	a9f1407488007a7a
+41	59913	1702703201000000000	/content/drive/Shareddrives/FP/FP/Captioning/grit/build/temp.linux-x86_64-cpython-310/content/drive/Shareddrives/FP/FP/Captioning/grit/models/ops/src/cuda/ms_deform_attn_cuda.o	1c3b89799bdc41e5
+43	61652	1702703202000000000	/content/drive/Shareddrives/FP/FP/Captioning/grit/build/temp.linux-x86_64-cpython-310/content/drive/Shareddrives/FP/FP/Captioning/grit/models/ops/src/vision.o	7edb80a4c395f3af

@@ -109,12 +109,12 @@ hydra:
   overrides:
     hydra: []
     task:
-    - +img_path=/content/drive/Shareddrives/FP/FP/Captioning/images/0003.jpg
+    - +img_path=/content/drive/Shareddrives/FP/FP/Captioning/images/0012.jpg
     - +vocab_path=/content/drive/Shareddrives/FP/FP/Captioning/grit/data/vocab.json
     - exp.checkpoint=/content/drive/Shareddrives/FP/FP/Captioning/grit/grit_checkpoint_4ds.pth
   job:
     name: inference_caption
-    override_dirname: +img_path=/content/drive/Shareddrives/FP/FP/Captioning/images/0003.jpg,+vocab_path=/content/drive/Shareddrives/FP/FP/Captioning/grit/data/vocab.json,exp.checkpoint=/content/drive/Shareddrives/FP/FP/Captioning/grit/grit_checkpoint_4ds.pth
+    override_dirname: +img_path=/content/drive/Shareddrives/FP/FP/Captioning/images/0012.jpg,+vocab_path=/content/drive/Shareddrives/FP/FP/Captioning/grit/data/vocab.json,exp.checkpoint=/content/drive/Shareddrives/FP/FP/Captioning/grit/grit_checkpoint_4ds.pth
     id: ???
     num: ???
     config_name: coco_config
