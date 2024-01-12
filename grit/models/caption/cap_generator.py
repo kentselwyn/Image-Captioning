@@ -3,9 +3,9 @@ from torch import nn
 from torch.nn import functional as F
 import numpy as np
 from einops import rearrange, repeat
-from models.common.attention import MultiHeadAttention, Attention
-from models.common.pos_embed import sinusoid_encoding_table, FeedForward
-from models.caption.containers import Module, ModuleList
+from grit.models.common.attention import MultiHeadAttention, Attention
+from grit.models.common.pos_embed import sinusoid_encoding_table, FeedForward
+from grit.models.caption.containers import Module, ModuleList
 
 
 class GeneratorLayer(Module):

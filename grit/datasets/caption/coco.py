@@ -15,7 +15,7 @@ from .field import ImageField, TextField
 
 from .example import Example
 from pycocotools.coco import COCO as pyCOCO
-from engine.utils import nested_tensor_from_tensor_list
+from grit.engine.utils import nested_tensor_from_tensor_list
 
 import torch
 from torch.nn.utils.rnn import pad_sequence

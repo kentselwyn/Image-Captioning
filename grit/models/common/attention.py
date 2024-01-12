@@ -8,7 +8,7 @@
 import numpy as np
 import torch
 from torch import nn
-from models.caption.containers import Module
+from grit.models.caption.containers import Module
 from einops import rearrange, repeat
 
 

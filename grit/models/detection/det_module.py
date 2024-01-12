@@ -15,8 +15,8 @@ import torch.nn.functional as F
 from torch import nn
 from torch.nn.init import normal_
 
-from utils.misc import inverse_sigmoid
-from models.ops.modules import MSDeformAttn
+from grit.utils.misc import inverse_sigmoid
+from grit.models.ops.modules import MSDeformAttn
 
 from timm.models.layers import DropPath
 

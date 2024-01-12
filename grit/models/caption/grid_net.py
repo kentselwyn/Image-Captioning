@@ -1,8 +1,8 @@
 import torch
 from torch import nn
 from torch.nn import functional as F
-from models.common.attention import MultiHeadAttention
-from models.common.pos_embed import FeedForward
+from grit.models.common.attention import MultiHeadAttention
+from grit.models.common.pos_embed import FeedForward
 from einops import repeat
 
 

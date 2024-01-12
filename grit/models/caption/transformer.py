@@ -1,12 +1,12 @@
 import torch
 from torch import nn
 from einops import rearrange, repeat
-from engine.utils import NestedTensor
+from grit.engine.utils import NestedTensor
 
-from models.common.attention import MemoryAttention
-from models.caption.base import BaseCaptioner
-from models.caption.grid_net import GridFeatureNetwork
-from models.caption.cap_generator import CaptionGenerator
+from grit.models.common.attention import MemoryAttention
+from grit.models.caption.base import BaseCaptioner
+from grit.models.caption.grid_net import GridFeatureNetwork
+from grit.models.caption.cap_generator import CaptionGenerator
 
 
 class Transformer(BaseCaptioner):

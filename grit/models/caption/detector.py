@@ -3,9 +3,9 @@ import torch.nn as nn
 import torch.nn.functional as F
 from einops import rearrange, repeat
 
-from models.common.swin_model import *
-from utils.misc import nested_tensor_from_tensor_list, NestedTensor
-from models.detection.det_module import build_det_module_with_config
+from grit.models.common.swin_model import *
+from grit.utils.misc import nested_tensor_from_tensor_list, NestedTensor
+from grit.models.detection.det_module import build_det_module_with_config
 
 
 class Detector(nn.Module):

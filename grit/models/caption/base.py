@@ -7,7 +7,7 @@
 # ------------------------------------------------------------------------
 
 import torch
-from models.caption.containers import Module
+from grit.models.caption.containers import Module
 
 
 class BaseCaptioner(Module):

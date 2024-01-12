@@ -1,10 +1,15 @@
+img_path: 'example.jpg'
+out_path: 'output.txt'
+vocab_path: 'grit/coco/annotations/vocab.json'
+exp_checkpoint: 'grit_checkpoint_vg.pth'
+
 exp:
   seed: 42
   name: eval
   rank: 0
   ngpus_per_node: 8
   world_size: 8
-  checkpoint: ''
+  checkpoint: 'grit_checkpoint_vg.pth'
   eval: False
   resume: False
 

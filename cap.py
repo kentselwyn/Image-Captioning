@@ -34,70 +34,81 @@ list_of_lang = 'https://gtts.readthedocs.io/en/v2.2.0/_modules/gtts/lang.html'
 
 
 class Caption:
-    def __init__(self,img_path,tts_path,voc_path,exp_checkpoint):
-        self.img_path = img_path
+    def __init__(
+        self,
+        tts_path,
+        voc_path,
+        out_path,
+        exp_checkpoint
+    ):
         self.tts_path = tts_path
         self.voc_path = voc_path
+        self.out_path = out_path
         self.exp_checkpoint = exp_checkpoint
 
-    def inference_caption(self):
-        initialize(config_path="configs/caption", job_name="inference_caption")
-        config = compose(config_name="coco_config", overrides=[
-            f"img_path={self.img_path}",
-            f"vocab_path={self.voc_path}",
-            f"exp.checkpoint={self.exp_checkpoint}"
-        ])
+        initialize(config_path="grit/configs/caption", job_name="inference_caption")
+        self.config = compose(config_name="coco_config")#, overrides=[
+        #    f"img_path={'example.jpg'}",
+        #    f"vocab_path={self.voc_path}",
+        #    f"exp.checkpoint={self.exp_checkpoint}"
+        #])
 
-        device = torch.device("cuda:0")
-        detector = build_detector(config).to(device)
-        model = Transformer(detector=detector, config=config)
-        model = model.to(device)
+        self.device = torch.device("cuda:0")
+        self.detector = build_detector(self.config).to(self.device)
+        self.model = Transformer(detector=self.detector, config=self.config)
+        self.model = self.model.to(self.device)
 
         # load checkpoint
-        if os.path.exists(config.exp.checkpoint):
-            checkpoint = torch.load(config.exp.checkpoint, map_location='cpu')
-            missing, unexpected = model.load_state_dict(checkpoint['state_dict'], strict=False)
-            print(f"model missing:{len(missing)} model unexpected:{len(unexpected)}")
+        if os.path.exists(self.config.exp.checkpoint):
+            self.checkpoint = torch.load(self.config.exp.checkpoint, map_location='cpu')
+            missing, unexpected = self.model.load_state_dict(self.checkpoint['state_dict'], strict=False)
+            #print(f"model missing:{len(missing)} model unexpected:{len(unexpected)}")
 
-        model.cached_features = False
+        self.model.cached_features = False
 
         # prepare utils
-        transform = get_transform(config.dataset.transform_cfg)['valid']
-        text_field = TextField(vocab_path=config.vocab_path if 'vocab_path' in config else config.dataset.vocab_path)
+        self.transform = get_transform(self.config.dataset.transform_cfg)['valid']
+        self.text_field = TextField(vocab_path=self.config.vocab_path if 'vocab_path' in self.config else self.config.dataset.vocab_path)
 
+    def inference_caption(self, img_path):
         # load image
-        rgb_image = Image.open(config.img_path).convert('RGB')
-        image = transform(rgb_image)
-        images = nested_tensor_from_tensor_list([image]).to(device)
+        rgb_image = Image.open(img_path).convert('RGB')
+        image = self.transform(rgb_image)
+        images = nested_tensor_from_tensor_list([image]).to(self.device)
 
         # inference and decode
         with torch.no_grad():
-            out, _ = model(
+            out, _ = self.model(
                 images,
                 seq=None,
                 use_beam_search=True,
-                max_len=config.model.beam_len,
-                eos_idx=config.model.eos_idx,
-                beam_size=config.model.beam_size,
+                max_len=self.config.model.beam_len,
+                eos_idx=self.config.model.eos_idx,
+                beam_size=self.config.model.beam_size,
                 out_size=1,
                 return_probs=False,
             )
-            caption = text_field.decode(out, join_words=True)[0]
-            print(caption)
-            output_file_path = '../output.txt'
-            with open(output_file_path, 'w') as f:
+            caption = self.text_field.decode(out, join_words=True)[0]
+            print(f'Generated Caption: {caption}')
+            with open(self.out_path, 'w') as f:
                 f.write(caption)
 
-    def convert_to_mp3(self,text,lang = 'en', filename ='output'):
-        tts = gTTS(text=text,
-                    lang=lang)
+    def convert_to_mp3(
+        self,
+        text,
+        lang = 'en', 
+        filename ='output'
+    ):
+        tts = gTTS(text=text, lang=lang)
         tts.save(self.tts_path + filename)
         Audio(self.tts_path + filename)
+    
     def translate_and_convert(self,text, target_language = 'en', filename = 'output'):
         translator = Translator()
         translation = translator.translate(text, dest=target_language)
         self.convert_to_mp3(translation.text,target_language, filename)
         return translation.text
+
 class FaceRecognition:
     def __init__(self):
         self.face_database = FaceDatabase(**config.face_database)
@@ -135,3 +146,12 @@ class FaceRecognition:
             self.labels.append(label)
         plt.figure(1, [5, 5]); plt.title('Result'); plt.imshow(query)    
 
+if __name__ == '__main__':
+    caption_generator = Caption(
+        tts_path='',
+        voc_path='grit/data/vocab.json',
+        out_path='./output.txt',
+        exp_checkpoint='grit/grit_checkpoint_vg.pth'
+    )
+
+    caption_generator.inference_caption('example.jpg')

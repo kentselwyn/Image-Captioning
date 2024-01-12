@@ -6,7 +6,7 @@
 # https://github.com/aimagelab/meshed-memory-transformer
 # ------------------------------------------------------------------------
 from torch import nn
-from utils.typing import *
+from grit.utils.typing import *
 from contextlib import contextmanager
 
 
