@@ -1,0 +1,7 @@
+# ninja log v5
+3	7034	1705046092696629730	/home/kentselwyn/ML_ImageCaptioning/grit/models/ops/build/temp.linux-x86_64-cpython-39/home/kentselwyn/ML_ImageCaptioning/grit/models/ops/src/cpu/ms_deform_attn_cpu.o	68a4a79144a73e0a
+3	14029	1705046099692834608	/home/kentselwyn/ML_ImageCaptioning/grit/models/ops/build/temp.linux-x86_64-cpython-39/home/kentselwyn/ML_ImageCaptioning/grit/models/ops/src/vision.o	fff95b06b7f57754
+3	16477	1705046102140905956	/home/kentselwyn/ML_ImageCaptioning/grit/models/ops/build/temp.linux-x86_64-cpython-39/home/kentselwyn/ML_ImageCaptioning/grit/models/ops/src/cuda/ms_deform_attn_cuda.o	2fbf32f91d2df154
+15	6461	1705046109677124488	/home/kentselwyn/ML_ImageCaptioning/grit/models/ops/build/temp.linux-x86_64-cpython-39/home/kentselwyn/ML_ImageCaptioning/grit/models/ops/src/cpu/ms_deform_attn_cpu.o	7e01d4bb1be6a597
+15	13179	1705046116393317854	/home/kentselwyn/ML_ImageCaptioning/grit/models/ops/build/temp.linux-x86_64-cpython-39/home/kentselwyn/ML_ImageCaptioning/grit/models/ops/src/vision.o	c9d849c099593765
+15	15874	1705046119089395114	/home/kentselwyn/ML_ImageCaptioning/grit/models/ops/build/temp.linux-x86_64-cpython-39/home/kentselwyn/ML_ImageCaptioning/grit/models/ops/src/cuda/ms_deform_attn_cuda.o	75564ad9436c7741

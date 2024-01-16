@@ -1,7 +1,6 @@
-img_path: 'example.jpg'
+img_path: 'Picture1.jpg' # <- Change this path for different picture
 out_path: 'output.txt'
 vocab_path: 'grit/coco/annotations/vocab.json'
-exp_checkpoint: 'grit_checkpoint_vg.pth'
 
 exp:
   seed: 42

@@ -1,1 +1,9 @@
+# Python caches
+**/__pycache__/
+
+# Model checkpoint
 *.pth
+
+# Database and images
+/database/
+/img/

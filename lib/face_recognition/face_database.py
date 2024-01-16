@@ -28,6 +28,7 @@ class FaceDatabase:
     
     def store(self, im, label):
         im_fname = self._generate_filename()
+
         # Update face ID table
         self.face_id[im_fname] = label
 
@@ -39,9 +40,6 @@ class FaceDatabase:
         # Remove cache if exists
         if os.path.isfile(self.db_root + "/representations_vgg_face.pkl"):
             os.remove(self.db_root + "/representations_vgg_face.pkl")
-        
-        with open(self.db_root + "/id", "wb") as fh:
-            pickle.dump(self.face_id, fh, protocol=pickle.HIGHEST_PROTOCOL)
 
     def _generate_filename(self):
         # Generate unique filename
