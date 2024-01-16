@@ -11,7 +11,7 @@ The project uses GRIT and Deepface to combine Image Captioning and Face Recognit
 ## Set Up
 Clone the project and install all the requirements in requirements.txt:
 ```
-!pip  install -r grit/requirements.txt
+!pip  install -r requirements.txt
 ```
 Then download the spacy data
 ```
