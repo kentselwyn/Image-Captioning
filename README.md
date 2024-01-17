@@ -97,7 +97,7 @@ Image Captioning without Facial Recognition
 | <img src="icon/Hilary.jpg" alt="Hillary Hahn" width="400"> | A woman sitting on a chair holding a instrument. |  
 | <img src="icon/guitar.jpg" alt="Guitar" width="400"> | A man sitting on a chair playing a guitar. |  
 | <img src="icon/Picture7.jpg" alt="Dog" width="400"> | A group of dog standing in a line. |  
-| <img src="icon/Picture8.jpg" alt="Pool" width="400"> | A man is leaning over a pool table with balls. |  
+| <img src="icon/Picture9.jpg" alt="Pool" width="400"> | A man is leaning over a pool table with balls. |  
 
 ## Evaluation
 We have decided to divide the evaluation process into three distinct parts. The first part focuses on image captioning, the second part concentrates on face recognition, and the third part assesses the overall performance of the model, which includes the image captioning feature with face recognition.  
