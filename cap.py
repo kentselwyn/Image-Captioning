@@ -1,4 +1,5 @@
 import os
+import argparse
 
 import torch
 import numpy as np
@@ -53,7 +54,6 @@ class ImageCaptioningWithFaceRecognition:
         face_recognition_config
     ):
         self.tts_path = tts_path
-        self.out_path = out_path
         self.exp_checkpoint = exp_checkpoint
 
         initialize(config_path="grit/configs/caption", job_name="inference_caption")
@@ -88,7 +88,7 @@ class ImageCaptioningWithFaceRecognition:
             is_eval=True
         )
 
-    def inference_caption(self, img_path):
+    def inference_caption(self, img_path, no_facial_recognition=False, vis_gradcam=False):
         # Load image
         rgb_image = Image.open(img_path).convert("RGB")
         image = self.transform(rgb_image)
@@ -110,10 +110,11 @@ class ImageCaptioningWithFaceRecognition:
             caption = self.text_field.decode(out, join_words=True)[0]
             with open(self.out_path, "w") as f:
                 f.write(caption)
+        if (no_facial_recognition):
+            print(f"Generated caption: {caption}")
+            return    
         print(f"Initially generated caption: {caption}")
-        
         img = (np.asarray(rgb_image)[..., :3]).astype(np.float32)
-        print(f"Image shape: {img.shape}, RGB Image shape: {rgb_image.size}")
         faces = self.face_recognition.find_faces(
             im=img_path, 
             database=self.face_database
@@ -223,7 +224,7 @@ class ImageCaptioningWithFaceRecognition:
 
     def convert_to_mp3(
         self,
-        text,
+        caption,
         lang="en", 
         filename="output"
     ):
@@ -231,7 +232,7 @@ class ImageCaptioningWithFaceRecognition:
         tts.save(self.tts_path + filename)
         Audio(self.tts_path + filename)
     
-    def translate_and_convert(self,text, target_language = 'en', filename = 'output'):
+    def translate_and_convert(self,text, target_language = "en", filename = "output"):
         translator = Translator()
         translation = translator.translate(text, dest=target_language)
         self.convert_to_mp3(translation.text,target_language, filename)
@@ -253,31 +254,64 @@ class ImageCaptioningWithFaceRecognition:
             self.face_database.store(face, name)  
 
 if __name__ == "__main__":
-    caption_generator = ImageCaptioningWithFaceRecognition(
-        tts_path="",
-        out_path="./output.txt",
-        exp_checkpoint="grit_checkpoint_vg.pth",
+
+    parser = argparse.ArgumentParser(
+        description="""
+        Image Captioning with Facial Recognition
+        
+        To input an image with a SINGLE face and a name into our database, run:
+        $ python cap.py -face_input <path/to/face.jpg> -name_input <name>
+
+        To caption an image without face recognition, run:
+        $ python cap.py -image_input <path/to/image.jpg> -no_facial_recogniton
+
+        To caption an image without face recognition with GradCam visualization, run:
+        $ python cap.py -image_input <path/to/image.jpg> -no_facial_recognition -vis_gradcam
+
+        To caption an image with face recognition in the database, run:
+        $ python cap.py -image_input <path/to/image.jpg>
+
+        To caption an image with face recognition in the database with GradCam visualization, run:
+        $ python cap.py -image_input <path/to/image.jpg> -vis_gradcam
+
+        Optional arguments:
+        -tts_path        the directory path to the tts output
+        -output_path     the directory path to the .txt caption and gradcam visualization output
+        -exp_checkpoint  the file path to the pre-trained weights
+        """
+    )
+    parser.add_argument("-face_input", default=None)
+    parser.add_argument("-name_input", default=None)
+    parser.add_argument("-image_input", default=None)
+    parser.add_argument("-no_facial_recognition", action="store_true")
+    parser.add_argument("-no_vis_gradcam", action="store_true")
+    parser.add_argument("-tts_path", default="./")
+    parser.add_arugment("-exp_checkpount", default="./grit_checkpoint_vg.pth")
+
+    if (parser.face_input == None) and (parser.image_input == None):
+        print("No input image provided.")
+        return
+
+    icwfr = ImageCaptioningWithFaceRecognition(
+        tts_path=parser.tts_path,
+        exp_checkpoint=exp_checkpoint,
         face_recognition_config=config
     )
 
-    faces = caption_generator.detect_faces(img_path="img/bill_2.jpg")
-    names = ["Bill"]
-    caption_generator.insert_faces_and_names(faces, names)
-
-    #faces = caption_generator.detect_faces(img_path="img/felix.jpg")
-    #names = ["Felix"]
-    #caption_generator.insert_faces_and_names(faces, names)
-
-    #faces = caption_generator.detect_faces(img_path="img/samuel.jpg")
-    #names = ["Samuel"]
-    #caption_generator.insert_faces_and_names(faces, names)
-
-    #faces = caption_generator.detect_faces(img_path="img/angie.jpg")
-    #names = ["Angeline"]
-    #caption_generator.insert_faces_and_names(faces, names)
-
-    #faces = caption_generator.detect_faces(img_path="img/kent.jpg")
-    #names = ["Kent"]
-    #caption_generator.insert_faces_and_names(faces, names)
+    if parser.face_input != None:
+        if parser.name_input == None:
+            print("No name provided (expected a name).")
+            return
+        # Detect face
+        faces = caption_generator.detect_faces(img_path=parser.face_input)
+        if (len(faces) == 0):
+            print(f"Detected no face in {parser.face_input} (expected an image with a single face)")
+            return
+        if (len(faces) > 1):
+            print(f"Detected more than one face in {parser.face_input} (expected an image with a single face)")
+        # Insert face and name into the database
+        icwfr.insert_faces_and_names(faces, [parser.name_input])
+        print(f"The face in image {parser.face_input} is labelled as {parser.name_input}.")
+        return
 
     caption_generator.inference_caption(img_path="img/test.jpg")

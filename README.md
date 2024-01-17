@@ -83,22 +83,21 @@ ML_ImageCaptioning/grit/coco/
 ## Fine-tuning  
 
 ## Qualitative Examples
-<p>
-  <b>Captioning</b>
-  <br>
-  <img src="icon/monalisa.jpg" alt="monalisa" width="400">
-  <img src="icon/dog2.jpg" alt="doggy in a line" width="400">
 
-  <b>Face recognition</b>
-  <br>
-  <img src="icon/face1.jpeg" alt="liverpool crowd" width="400">
-  <img src="icon/face2.png" alt="lots of people" width="400">
-  
-  <b>Captioning + Face recognition</b>
-  <br>
-  <img src="icon/billdog.jpg" alt="Bill with dog" width="200">
-  <img src="icon/dave.jpg" alt="Dave and woman" width="400">
-</p>
+Image Captioning and Facial Recognition  
+| Image | Generated Caption |
+| -- | -- |
+| <img src="icon/elon_musk.jpg" alt="Elon Musk" width="400"> | Elon Musk sitting at a table with a microphone. |  
+| <img src="icon/lebron_james.jpg" alt="Elon Musk" width="400"> | Lebron James holding a ball on a court. |  
+| <img src="icon/samuel_and_will.jpg" alt="Samuel L. Jackson and Will Smith" width="400"> | Samuel L. Jackson and Will Smith standing next to each other. |  
+
+Image Captioning without Facial Recognition  
+| Image | Generated Caption |
+| -- | -- |
+| <img src="icon/Hilary.jpg" alt="Hillary Hahn" width="400"> | A woman sitting on a chair holding a instrument. |  
+| <img src="icon/guitar.jpg" alt="Guitar" width="400"> | A man sitting on a chair playing a guitar. |  
+| <img src="icon/Picture7.jpg" alt="Dog" width="400"> | A group of dog standing in a line. |  
+| <img src="icon/Picture8.jpg" alt="Pool" width="400"> | A man is leaning over a pool table with balls. |  
 
 ## Evaluation
 We have decided to divide the evaluation process into three distinct parts. The first part focuses on image captioning, the second part concentrates on face recognition, and the third part assesses the overall performance of the model, which includes the image captioning feature with face recognition.  

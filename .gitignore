@@ -5,5 +5,12 @@
 *.pth
 
 # Database and images
-/database/
-/img/
+database/
+img/
+
+# Python builds
+build/
+
+# MultiScaleDeformableAttention
+MultiScaleDeformableAttention.egg-info/
+MultiScaleDeformableAttention.cpython-310-x86_64-linux-gnu.so
