@@ -1,32 +1,66 @@
 # Image Captioning With Face Recognition
 
-This is the repository for Group 8's final project of the course Introduction to Machine Learning (11210CS 460200) provided at National Tsing Hua University by professor KUO, PO-CHIH.
-
-The project uses GRIT and Deepface to combine Image Captioning and Face Recognition to aid visually impaired people in recognizing Images.
+Repository for the final project of Group 8 in the Introduction to Machine Learning (CS 460200) course offered by National Tsing Hua University by professor KUO, PO-CHIH.  The project uses GRIT and DeepFace to combine Image Captioning and Face Recognition to aid visually impaired people in recognizing Images.
 
 <p align="center">
   <img src="model.jpg" alt="Meshed-Memory Transformer" width="600">
 </p>
 
-## Set Up
-Clone the project and install all the requirements in requirements.txt:
-```
-!pip  install -r requirements.txt
-```
-Then download the spacy data
-```
-!python -m spacy download en
-```
+## Installation
+### Requirements
+* `Python` >= 3.9, `CUDA` >= 11.3
+* `Pytorch` >= 1.12.0, `torchvision` >= 0.6.1
+* Anaconda environment
 
-### Install the pre-trained model
-Using the link below, download the pre-trained model that we use in our project.
-Feel free to train it on your own, if you want to do so, head over to github of [1]
-| Model                                           | Task             | Checkpoint                                                                                           |
-|-------------------------------------------------|------------------|------------------------------------------------------------------------------------------------------|
-| GRIT (using the object detector A)              | Image Captioning | [GG Drive link](https://drive.google.com/file/d/12tsI3Meka2mNLON-tWTnVJnUzUOa-foW/view?usp=share_link) |
-| GRIT (using the object detector B)              | Image Captioning | [GG Drive link](https://drive.google.com/file/d/1jgEqNFuKcKg_RcG4Nq8bhWvCgzi6bjuD/view?usp=share_link) |
+### Setup
+* Clone the project
+  ```
+  git clone https://github.com/kentselwyn/ML_ImageCaptioning.git
+  ```
+* Create an Anaconda environment
+  ```
+  conda create -n ICwFR python=3.9
+  conda activate ICwFR
+  ```
+  **Troubleshoot**: If `conda activate ICwFR` fails, run `source activate ICwFR` instead to activate the environment.
+* Install PyTorch (with the appropriate version for your CUDA)  
+  Please refer to [PyTorch Installation Link](https://pytorch.org/) for further installation steps.
+* Install all the required packages in `requirements.txt`
+  ```
+  cd ML_ImageCaptioning/
+  pip  install -r requirements.txt
+  ```
+* Install CuDNN
+  ```
+  conda install cudnn
+  ```
+* Download the spacy data for vocab
+  ```
+  python -m spacy download en
+  ```
+
+## Pretrained Weights
+The pre-trained weights are provided by [1]. 
+| Image Captioning Model | Checkpoint |
+| -- | :--: |
+| GRIT (using the Object Detector trained on Visual Genome) | [Drive link](https://drive.google.com/file/d/12tsI3Meka2mNLON-tWTnVJnUzUOa-foW/view?usp=share_link) |
+| GRIT (using the Object Detector trained on COCO, Visual Genome, Open Images, and Object365) | [Drive link](https://drive.google.com/file/d/1jgEqNFuKcKg_RcG4Nq8bhWvCgzi6bjuD/view?usp=share_link) |
+
+Place the pre-trained weights in the path `ML_ImageCaptioning/`
 
 ## How to run
+
+### Command-Line Interface  
+```
+```
+
+### Google Colaboratory  
+```
+```
+
+### API
+```
+```
 
 ## Output Examples
 <p>
@@ -47,12 +81,12 @@ Feel free to train it on your own, if you want to do so, head over to github of 
 </p>
 
 ## Evaluation
-We have decided to divide the evaluation process into three distinct parts. The first part focuses on image captioning, the second part concentrates on face recognition, and the third part assesses the overall performance of the model, which includes the image captioning feature with face recognition.
+We have decided to divide the evaluation process into three distinct parts. The first part focuses on image captioning, the second part concentrates on face recognition, and the third part assesses the overall performance of the model, which includes the image captioning feature with face recognition.  
 
-At present, there is no specific method to evaluate our entire model, so we will be doing it visually. As a result, we will present several outputs from the model for your perusal.
+At present, there is no specific metric to evaluate the performance of our entire model. We will present several outputs from the model for your perusal.  
 
 ### GRIT Image Captioning
-Below is the table for GRIT image captioning model offline and online evaluation. In all of the evaluation table for image captioning model, B-1, B-2, B-3, B-4, M, R, and C are metrics used to measure the performance of the model. B-1, B-2, B-3, and B-4 are short for BLEU-1, BLEU-2, BLEU-3, and BLEU-4, M is short for METEOR, R is short for ROUGE, C is short for CIDEr and S is short for SPICE. 
+Below is the table for GRIT image captioning model offline and online evaluation. In all of the evaluation tables for the image captioning model, B-1, B-2, B-3, B-4, M, R, and C are metrics used to measure the performance of the model. B-1, B-2, B-3, and B-4 are short for BLEU-1, BLEU-2, BLEU-3, and BLEU-4, M is short for METEOR, R is short for ROUGE, C is short for CIDEr and S is short for SPICE. 
 
 Offline Evaluation w/ VL pretraining:
 | Methods       | V.E. (Type) // #V L (Data) | B-1 | B-4      | M        | R | C         | S        |
@@ -86,10 +120,7 @@ Offline Evaluation w/o VL pretraining:
 | GRIT           |     R+G     | 83.5 | 41.9 | 30.5 | 60.5 | 142.2 | 24.2 |
 | GRIT+          |     R+G     | 84.2 | 42.4 | 30.6 | 60.7 | 144.2 | 24.3 |
 
-
-
-
-## References
-[1] GRIT: Faster and Better Image captioning Transformer https://github.com/davidnvq/grit
-[2] deepface https://github.com/serengil/deepface
-[3]
+## References  
+We used several amazing open-source repositories as our foundation models.  
+[1] GRIT: Faster and Better Image Captioning Transformer https://github.com/davidnvq/grit  
+[2] deepface https://github.com/serengil/deepface  
