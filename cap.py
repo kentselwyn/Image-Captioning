@@ -53,6 +53,7 @@ class ImageCaptioningWithFaceRecognition:
         exp_checkpoint,
         face_recognition_config
     ):
+        self.out_path = out_path
         self.tts_path = tts_path
         self.exp_checkpoint = exp_checkpoint
 
@@ -88,7 +89,7 @@ class ImageCaptioningWithFaceRecognition:
             is_eval=True
         )
 
-    def inference_caption(self, img_path, no_facial_recognition=False, vis_gradcam=False):
+    def inference_caption(self, img_path, no_facial_recognition=False):
         # Load image
         rgb_image = Image.open(img_path).convert("RGB")
         image = self.transform(rgb_image)
@@ -253,65 +254,65 @@ class ImageCaptioningWithFaceRecognition:
         for face, name in zip(faces, names):
             self.face_database.store(face, name)  
 
-if __name__ == "__main__":
 
+def run_main(args):
+    if (args["face_input"] == None) and (args["image_input"] == None):
+        print("No input image provided.")
+        return
+
+    icwfr = ImageCaptioningWithFaceRecognition(
+        out_path=args["out_path"],
+        tts_path=args["tts_path"],
+        exp_checkpoint=args["exp_checkpoint"],
+        face_recognition_config=config
+    )
+
+    if args["face_input"] != None:
+        if args["name_input"] == None:
+            print("No name provided (expected a name).")
+            return
+        # Detect face
+        faces = icwfr.detect_faces(img_path=args["face_input"])
+        if (len(faces) == 0):
+            print(f"Detected no face in {args['face_input']} (expected an image with a single face)")
+            return
+        if (len(faces) > 1):
+            print(f"Detected more than one face in {args['face_input']} (expected an image with a single face)")
+        # Insert face and name into the database
+        icwfr.insert_faces_and_names(faces, [args["name_input"]])
+        print(f"The face in image {args['face_input']} is labelled as {args['name_input']}.")
+        return
+
+    if args["image_input"] != None:
+        icwfr.inference_caption(img_path=args["image_input"], no_facial_recognition=args["no_facial_recognition"])
+
+if __name__ == "__main__":
     parser = argparse.ArgumentParser(
         description="""
         Image Captioning with Facial Recognition
         
         To input an image with a SINGLE face and a name into our database, run:
-        $ python cap.py -face_input <path/to/face.jpg> -name_input <name>
+        $ python cap.py --face_input "path/to/face.jpg" --name_input "name"
 
         To caption an image without face recognition, run:
-        $ python cap.py -image_input <path/to/image.jpg> -no_facial_recogniton
-
-        To caption an image without face recognition with GradCam visualization, run:
-        $ python cap.py -image_input <path/to/image.jpg> -no_facial_recognition -vis_gradcam
+        $ python cap.py --image_input "path/to/image.jpg" --no_facial_recogniton
 
         To caption an image with face recognition in the database, run:
-        $ python cap.py -image_input <path/to/image.jpg>
-
-        To caption an image with face recognition in the database with GradCam visualization, run:
-        $ python cap.py -image_input <path/to/image.jpg> -vis_gradcam
+        $ python cap.py --image_input "path/to/image.jpg"
 
         Optional arguments:
-        -tts_path        the directory path to the tts output
-        -output_path     the directory path to the .txt caption and gradcam visualization output
-        -exp_checkpoint  the file path to the pre-trained weights
+        --tts_path        the directory path to the tts output
+        --output_path     the directory path to the .txt caption and gradcam visualization output
+        --exp_checkpoint  the file path to the pre-trained weights
         """
     )
-    parser.add_argument("-face_input", default=None)
-    parser.add_argument("-name_input", default=None)
-    parser.add_argument("-image_input", default=None)
-    parser.add_argument("-no_facial_recognition", action="store_true")
-    parser.add_argument("-no_vis_gradcam", action="store_true")
-    parser.add_argument("-tts_path", default="./")
-    parser.add_arugment("-exp_checkpount", default="./grit_checkpoint_vg.pth")
+    parser.add_argument("--face_input", default=None)
+    parser.add_argument("--name_input", default=None)
+    parser.add_argument("--image_input", default=None)
+    parser.add_argument("--no_facial_recognition", action="store_true")
+    parser.add_argument("--out_path", default="./output.txt")
+    parser.add_argument("--tts_path", default="./")
+    parser.add_argument("--exp_checkpoint", default="./grit_checkpoint_vg.pth")
 
-    if (parser.face_input == None) and (parser.image_input == None):
-        print("No input image provided.")
-        return
-
-    icwfr = ImageCaptioningWithFaceRecognition(
-        tts_path=parser.tts_path,
-        exp_checkpoint=exp_checkpoint,
-        face_recognition_config=config
-    )
-
-    if parser.face_input != None:
-        if parser.name_input == None:
-            print("No name provided (expected a name).")
-            return
-        # Detect face
-        faces = caption_generator.detect_faces(img_path=parser.face_input)
-        if (len(faces) == 0):
-            print(f"Detected no face in {parser.face_input} (expected an image with a single face)")
-            return
-        if (len(faces) > 1):
-            print(f"Detected more than one face in {parser.face_input} (expected an image with a single face)")
-        # Insert face and name into the database
-        icwfr.insert_faces_and_names(faces, [parser.name_input])
-        print(f"The face in image {parser.face_input} is labelled as {parser.name_input}.")
-        return
-
-    caption_generator.inference_caption(img_path="img/test.jpg")
+    args = vars(parser.parse_args())
+    run_main(args)

@@ -67,20 +67,21 @@ ML_ImageCaptioning/grit/coco/
 ## Running
 
 ### Command-Line Interface  
-```
+
+To input an image with a SINGLE face and a name into our database, run:  
+```shell
+python cap.py --face_input "path/to/face.jpg" --name_input "name"
 ```
 
-### Google Colaboratory  
+To caption an image without face recognition, run:  
 ```
-```
-
-### API
-```
+python cap.py --image_input "path/to/image.jpg" --no_facial_recogniton
 ```
 
-## Training  
-
-## Fine-tuning  
+To caption an image with face recognition in the database, run:  
+```
+python cap.py --image_input "path/to/image.jpg"
+```
 
 ## Qualitative Examples
 
