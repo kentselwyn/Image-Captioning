@@ -14,11 +14,11 @@ Repository for the final project of Group 8 in the Introduction to Machine Learn
 
 ### Setup
 * Clone the project
-  ```
+  ```shell
   git clone https://github.com/kentselwyn/ML_ImageCaptioning.git
   ```
 * Create an Anaconda environment
-  ```
+  ```shell
   conda create -n ICwFR python=3.9
   conda activate ICwFR
   ```
@@ -26,17 +26,23 @@ Repository for the final project of Group 8 in the Introduction to Machine Learn
 * Install PyTorch (with the appropriate version for your CUDA)  
   Please refer to [PyTorch Installation Link](https://pytorch.org/) for further installation steps.
 * Install all the required packages in `requirements.txt`
-  ```
+  ```shell
   cd ML_ImageCaptioning/
   pip  install -r requirements.txt
   ```
 * Install CuDNN
-  ```
+  ```shell
   conda install cudnn
   ```
 * Download the spacy data for vocab
-  ```
+  ```shell
   python -m spacy download en
+  ```
+* Install Deformable Attention
+  ```shell
+  cd grit/models/ops/
+  python setup.py build develop
+  python test.py
   ```
 
 ## Pretrained Weights
@@ -46,9 +52,19 @@ The pre-trained weights are provided by [1].
 | GRIT (using the Object Detector trained on Visual Genome) | [Drive link](https://drive.google.com/file/d/12tsI3Meka2mNLON-tWTnVJnUzUOa-foW/view?usp=share_link) |
 | GRIT (using the Object Detector trained on COCO, Visual Genome, Open Images, and Object365) | [Drive link](https://drive.google.com/file/d/1jgEqNFuKcKg_RcG4Nq8bhWvCgzi6bjuD/view?usp=share_link) |
 
-Place the pre-trained weights in the path `ML_ImageCaptioning/`
+Place the pre-trained weights in the directory path `ML_ImageCaptioning/`
 
-## How to run
+## Dataset
+We use COCO 2014 for Image Captioning from [COCO Official Website](HTTP://cocodataset.org/#download) as our dataset. Download and place the dataset in the directory path:  
+```
+ML_ImageCaptioning/grit/coco/
+├── annotations/
+├── train2014/
+├── val2014/
+└── test2014/
+```
+
+## Running
 
 ### Command-Line Interface  
 ```
@@ -62,7 +78,11 @@ Place the pre-trained weights in the path `ML_ImageCaptioning/`
 ```
 ```
 
-## Output Examples
+## Training  
+
+## Fine-tuning  
+
+## Qualitative Examples
 <p>
   <b>Captioning</b>
   <br>
