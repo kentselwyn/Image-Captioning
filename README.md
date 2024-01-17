@@ -74,14 +74,20 @@ python cap.py --face_input "path/to/face.jpg" --name_input "name"
 ```
 
 To caption an image without face recognition, run:  
-```
-python cap.py --image_input "path/to/image.jpg" --no_facial_recogniton
+```shell
+python cap.py --image_input "path/to/image.jpg" --no_facial_recognition
 ```
 
 To caption an image with face recognition in the database, run:  
-```
+```shell
 python cap.py --image_input "path/to/image.jpg"
 ```
+
+| Optional arguments | Purpose |  
+| -- | -- |
+| `--tts_path` | the directory path to the tts output |
+| `--output_path` | the directory path to the .txt caption |
+| `--exp_checkpoint` | the file path to the pre-trained weights |
 
 ## Qualitative Examples
 
