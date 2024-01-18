@@ -1,0 +1,3 @@
+- +img_path=/content/drive/Shareddrives/FP/FP/Captioning/images/0003.jpg
+- +vocab_path=/content/drive/Shareddrives/FP/FP/Captioning/grit/data/vocab.json
+- exp.checkpoint=/content/drive/Shareddrives/FP/FP/Captioning/grit/grit_checkpoint_4ds.pth

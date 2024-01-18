@@ -1,0 +1,79 @@
+exp:
+  seed: 42
+  name: eval
+  rank: 0
+  ngpus_per_node: 8
+  world_size: 8
+  checkpoint: /content/drive/Shareddrives/FP/FP/Captioning/grit/grit_checkpoint_4ds.pth
+  eval: false
+  resume: false
+dataset:
+  overfit: false
+  ann_root: ${oc.env:DATA_ROOT}/annotations
+  img_root: ${oc.env:DATA_ROOT}
+  hdf5_path: ${oc.env:DATA_ROOT}/all_splits.h5
+  vocab_path: ${oc.env:DATA_ROOT}/annotations/vocab.json
+  use_gri_feat: ${model.use_gri_feat}
+  use_reg_feat: ${model.use_reg_feat}
+  transform_cfg:
+    size:
+    - 384
+    - 640
+    resize_name: maxwh
+    randaug: true
+model:
+  use_gri_feat: true
+  use_reg_feat: true
+  grid_feat_dim: 1024
+  frozen_stages: 2
+  beam_size: 5
+  beam_len: 20
+  dropout: 0.2
+  attn_dropout: 0.2
+  vocab_size: 10201
+  max_len: 54
+  pad_idx: 1
+  bos_idx: 2
+  eos_idx: 3
+  d_model: 512
+  n_heads: 8
+  grid_net:
+    n_memories: 1
+    n_layers: 3
+  cap_generator:
+    decoder_name: parallel
+    n_layers: 3
+  detector:
+    checkpoint: ''
+    d_model: 512
+    dim_feedforward: 1024
+    num_heads: 8
+    num_layers: 6
+    num_levels: 4
+    num_points: 4
+    num_queries: 150
+    num_classes: 1849
+    dropout: 0.1
+    activation: relu
+    return_intermediate: true
+    with_box_refine: true
+optimizer:
+  warmup_init_lr: 1.0e-05
+  min_lr: 0.0001
+  xe_lr: 0.0001
+  sc_lr: 5.0e-06
+  xe_backbone_lr: 1.0e-05
+  sc_backbone_lr: 5.0e-06
+  weight_decay: 0.01
+  beta_1: 0.9
+  beta_2: 0.99
+  batch_size: 16
+  num_workers: 2
+  freezing_xe_epochs: 0
+  freezing_sc_epochs: 0
+  finetune_xe_epochs: 10
+  finetune_sc_epochs: 10
+  freeze_detector: false
+  freeze_backbone: false
+img_path: /content/drive/Shareddrives/FP/FP/Captioning/images/0003.jpg
+vocab_path: /content/drive/Shareddrives/FP/FP/Captioning/grit/data/vocab.json
