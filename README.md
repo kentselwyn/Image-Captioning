@@ -87,18 +87,16 @@ python cap.py --image_input "path/to/image.jpg"
 | -- | -- |
 | `--tts_path` | the directory path to the tts output |
 | `--output_path` | the directory path to the .txt caption |
-| `--exp_checkpoint` | the file path to the pre-trained weights |
-### Google-Colab
-Clone and move the codes and checkpoint into a google drive folder <br>
-Create folders for :
-<br>
-Images <br>
-Text-to-speech output (optional)<br>
-Text output (optional)<br>
+| `--exp_checkpoint` | the file path to the pre-trained weights |  
 
-
-Refer to main.ipynb for an example
-
+### Google Colaboratory
+Follow  `Setup` to clone and move the codes and checkpoint into a Google Drive folder. 
+Create folders for:
+* Images  
+* Text-to-speech output (Optional)  
+* Text output (Optional)  
+  
+Refer to `main.ipynb` for an example.
 
 ## Qualitative Examples
 
